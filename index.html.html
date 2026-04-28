@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Nossa Playlist</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(180deg, #1db954 0%, #121212 60%);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* TEXTOS DE FUNDO */
+.bg-text {
+  position: fixed;
+  color: rgba(255,255,255,0.05);
+  font-size: 14px;
+  pointer-events: none;
+  animation: fade 6s infinite alternate;
+}
+
+@keyframes fade {
+  from { opacity: 0.03; }
+  to { opacity: 0.08; }
+}
+
+.t1 { top: 15%; left: 10%; }
+.t2 { top: 40%; left: 70%; }
+.t3 { top: 70%; left: 25%; }
+.t4 { top: 55%; left: 40%; }
+
+/* HEADER */
+.header {
+  padding: 50px 20px 20px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.contador {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #e0e0e0;
+}
+
+/* LISTA */
+.container {
+  padding: 20px;
+}
+
+/* CARD */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px;
+  margin: 14px 0;
+  border-radius: 14px;
+  cursor: pointer;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(12px);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* brilho */
+.card::after {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
+  top: 0;
+  left: -120%;
+  transition: 0.5s;
+}
+
+.card:hover::after {
+  left: 120%;
+}
+
+.card:hover {
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.08);
+}
+
+/* CAPA */
+.card img {
+  width: 75px;
+  height: 75px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* TEXTO */
+.info h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.info p {
+  margin: 4px 0;
+  color: #cfcfcf;
+  font-size: 14px;
+}
+
+/* FRASE FINAL */
+.footer {
+  text-align: center;
+  margin: 50px 0 20px;
+  font-size: 13px;
+  color: #aaa;
+}
+</style>
+
+</head>
+<body>
+
+<!-- POEMAS / FRASES -->
+<div class="bg-text t1">te encontrei sem procurar</div>
+<div class="bg-text t2">tudo ficou mais leve depois de você</div>
+<div class="bg-text t3">cada música lembra um momento</div>
+<div class="bg-text t4">eu escolheria você de novo</div>
+
+<div class="header">
+  <h1>Nossa Playlist</h1>
+  <div class="contador" id="contador"></div>
+</div>
+
+<div class="container">
+
+  <div class="card" onclick="abrir('https://open.spotify.com/track/1ngbz6irbfEmpsYcZhzX6L')">
+    <img src="baby.jpg">
+    <div class="info">
+      <h3>Eternamente</h3>
+      <p>Gal Costa</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="abrir('https://open.spotify.com/track/1wr0uRurcTSeBXIfyrTVKC')">
+    <img src="mulher.jpg">
+    <div class="info">
+      <h3>Mulher Homem Bicho</h3>
+      <p>Ana Frango Elétrico</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="abrir('https://open.spotify.com/track/6fPan2saHdFaIHuTSatORv')">
+    <img src="lunch.jpg">
+    <div class="info">
+      <h3>L'AMOUR DE MA VIE</h3>
+      <p>Billie Eilish</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  cada música aqui guarda um pedaço do que a gente vive
+</div>
+
+<script>
+// ABRIR SPOTIFY
+function abrir(link) {
+  window.open(link, "_blank");
+}
+
+// CONTADOR
+const inicio = new Date("2026-02-07T00:00:00");
+
+function atualizar() {
+  const agora = new Date();
+  const diff = agora - inicio;
+
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor((diff/(1000*60*60)) % 24);
+  const minutos = Math.floor((diff/(1000*60)) % 60);
+  const segundos = Math.floor((diff/1000) % 60);
+
+  document.getElementById("contador").innerText =
+    dias + " dias " +
+    horas + "h " +
+    minutos + "m " +
+    segundos + "s juntos";
+}
+
+setInterval(atualizar, 1000);
+atualizar();
+</script>
+
+</body>
+</html>
