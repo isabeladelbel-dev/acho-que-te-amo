@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Nossa Playlist</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #121212;
+  color: white;
+}
+
+/* HEADER */
+.header {
+  padding: 30px;
+  background: linear-gradient(to bottom, #1db954, #121212);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 42px;
+}
+
+.sub {
+  color: #b3b3b3;
+  font-size: 14px;
+}
+
+/* CONTADOR */
+.contador {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #1db954;
+}
+
+/* LISTA */
+.lista {
+  padding: 20px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 30px 60px 1fr;
+  gap: 15px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.item:hover {
+  background: #1a1a1a;
+}
+
+.item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.titulo {
+  font-size: 15px;
+}
+
+.artista {
+  font-size: 13px;
+  color: #b3b3b3;
+}
+
+/* POEMAS TRANSPARENTES */
+.poema {
+  position: absolute;
+  font-size: 14px;
+  color: rgba(255,255,255,0.07);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* POSIÇÕES */
+.p1 { top: 300px; left: 10%; }
+.p2 { top: 600px; left: 60%; }
+.p3 { top: 900px; left: 20%; }
+.p4 { top: 1200px; left: 50%; }
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="sub">Playlist</div>
+  <h1>Nossa Playlist</h1>
+  <div class="contador" id="contador"></div>
+</div>
+
+<div class="lista">
+
+  <div class="item" onclick="abrir('1ngbz6irbfEmpsYcZhzX6L')">
+    <div>1</div>
+    <img src="baby.jpg">
+    <div>
+      <div class="titulo">Eternamente</div>
+      <div class="artista">Gal Costa</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="abrir('1wr0uRurcTSeBXIfyrTVKC')">
+    <div>2</div>
+    <img src="mulher.jpg">
+    <div>
+      <div class="titulo">Mulher Homem Bicho</div>
+      <div class="artista">Ana Frango Elétrico</div>
+    </div>
+  </div>
+
+  <div class="item" onclick="abrir('6fPan2saHdFaIHuTSatORv')">
+    <div>3</div>
+    <img src="lunch.jpg">
+    <div>
+      <div class="titulo">L'AMOUR DE MA VIE</div>
+      <div class="artista">Billie Eilish</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- POEMAS ESPALHADOS -->
+<div class="poema p1">te encontrei sem procurar</div>
+<div class="poema p2">tudo ficou mais leve depois de você</div>
+<div class="poema p3">cada música lembra um momento</div>
+<div class="poema p4">eu escolheria você de novo</div>
+
+<script>
+// abrir spotify (app + fallback)
+function abrir(id) {
+  window.location.href = "spotify:track:" + id;
+
+  setTimeout(() => {
+    window.open("https://open.spotify.com/track/" + id, "_blank");
+  }, 1000);
+}
+
+// contador
+const inicio = new Date("2026-02-07T00:00:00");
+
+function atualizar() {
+  const agora = new Date();
+  const diff = agora - inicio;
+
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor((diff/(1000*60*60)) % 24);
+  const minutos = Math.floor((diff/(1000*60)) % 60);
+  const segundos = Math.floor((diff/1000) % 60);
+
+  document.getElementById("contador").innerText =
+    dias + " dias, " +
+    horas + "h " +
+    minutos + "m " +
+    segundos + "s juntos";
+}
+
+setInterval(atualizar, 1000);
+atualizar();
+</script>
+
+</body>
+</html>
