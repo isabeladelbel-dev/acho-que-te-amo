@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Você</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+
+    header {
+      padding: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #181818;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px;
+      width: 180px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      background-color: #282828;
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 16px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #b3b3b3;
+    }
+
+    .player {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #181818;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    button {
+      background: #1db954;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      color: white;
+      font-weight: bold;
+    }
+
+    audio {
+      width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+<header> Nossa Playlist</header>
+
+<div class="container" id="playlist">
+  <!-- músicas entram aqui -->
+</div>
+
+<div class="player">
+  <div id="nowPlaying">Nenhuma música tocando</div>
+  <audio id="audioPlayer" controls></audio>
+</div>
+
+<script>
+  const musicas = [
+    {
+      titulo: "Música 1",
+      artista: "Artista",
+      capa: "https://via.placeholder.com/150",
+      arquivo: "musica1.mp3"
+    },
+    {
+      titulo: "Música 2",
+      artista: "Artista",
+      capa: "https://via.placeholder.com/150",
+      arquivo: "musica2.mp3"
+    }
+  ];
+
+  const playlist = document.getElementById("playlist");
+  const player = document.getElementById("audioPlayer");
+  const nowPlaying = document.getElementById("nowPlaying");
+
+  musicas.forEach(musica => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.innerHTML = `
+      <img src="${musica.capa}">
+      <h3>${musica.titulo}</h3>
+      <p>${musica.artista}</p>
+    `;
+
+    card.onclick = () => {
+      player.src = musica.arquivo;
+      player.play();
+      nowPlaying.innerText = `Tocando: ${musica.titulo} - ${musica.artista}`;
+    };
+
+    playlist.appendChild(card);
+  });
+</script>
+
+</body>
+</html>
