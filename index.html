@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Nossa Playlist</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: white;
+}
+
+/* HEADER */
+.header {
+  padding: 30px 20px;
+  background: linear-gradient(to bottom, #1db954, #121212);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.contador {
+  margin-top: 10px;
+  color: #ddd;
+  font-size: 14px;
+}
+
+/* LISTA */
+.container {
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.card img {
+  width: 65px;
+  height: 65px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.info p {
+  margin: 3px 0;
+  color: #b3b3b3;
+}
+
+/* PLAYER */
+.player {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #181818;
+  display: none;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 15px;
+}
+
+.player img {
+  width: 50px;
+  height: 50px;
+  border-radius: 6px;
+}
+
+.player iframe {
+  border: none;
+  height: 80px;
+  width: 300px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <h1>Nossa Playlist</h1>
+  <div class="contador" id="contador"></div>
+</div>
+
+<div class="container">
+
+  <div class="card" onclick="tocar('1ngbz6irbfEmpsYcZhzX6L','baby.jpg','Eternamente','Gal Costa')">
+    <img src="baby.jpg">
+    <div class="info">
+      <h3>Eternamente</h3>
+      <p>Gal Costa</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="tocar('1wr0uRurcTSeBXIfyrTVKC','mulher.jpg','Mulher Homem Bicho','Ana Frango Elétrico')">
+    <img src="mulher.jpg">
+    <div class="info">
+      <h3>Mulher Homem Bicho</h3>
+      <p>Ana Frango Elétrico</p>
+    </div>
+  </div>
+
+  <div class="card" onclick="tocar('6fPan2saHdFaIHuTSatORv','lunch.jpg','L\'AMOUR DE MA VIE','Billie Eilish')">
+    <img src="lunch.jpg">
+    <div class="info">
+      <h3>L'AMOUR DE MA VIE</h3>
+      <p>Billie Eilish</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- PLAYER -->
+<div class="player" id="player">
+  <img id="cover">
+  <div>
+    <div id="titulo"></div>
+    <div style="color:#aaa;font-size:13px" id="artista"></div>
+  </div>
+  <iframe id="frame"></iframe>
+</div>
+
+<script>
+// PLAYER
+function tocar(id, img, titulo, artista) {
+  document.getElementById("frame").src =
+    "https://open.spotify.com/embed/track/" + id;
+
+  document.getElementById("cover").src = img;
+  document.getElementById("titulo").innerText = titulo;
+  document.getElementById("artista").innerText = artista;
+
+  document.getElementById("player").style.display = "flex";
+}
+
+// CONTADOR
+const inicio = new Date("2026-02-07T00:00:00");
+
+function atualizar() {
+  const agora = new Date();
+  const diff = agora - inicio;
+
+  const dias = Math.floor(diff / (1000*60*60*24));
+  const horas = Math.floor((diff/(1000*60*60)) % 24);
+  const minutos = Math.floor((diff/(1000*60)) % 60);
+  const segundos = Math.floor((diff/1000) % 60);
+
+  document.getElementById("contador").innerText =
+    "Juntos há: " +
+    dias + " dias " +
+    horas + "h " +
+    minutos + "m " +
+    segundos + "s";
+}
+
+setInterval(atualizar, 1000);
+atualizar();
+</script>
+
+</body>
+</html>
